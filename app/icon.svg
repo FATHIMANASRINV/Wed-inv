@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#0f1d38" />
+  <rect x="4" y="4" width="56" height="56" rx="10" fill="none" stroke="#c9a961" stroke-width="0.8" opacity="0.6" />
+  <text x="32" y="30" font-family="Georgia, serif" font-size="24" font-style="italic" fill="#c9a961" text-anchor="middle">A</text>
+  <line x1="22" y1="34" x2="42" y2="34" stroke="#c9a961" stroke-width="0.8" />
+  <text x="32" y="54" font-family="Georgia, serif" font-size="24" font-style="italic" fill="#c9a961" text-anchor="middle">N</text>
+</svg>

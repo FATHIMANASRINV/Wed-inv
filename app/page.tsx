@@ -1,69 +1,406 @@
-import Image from "next/image";
+"use client";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [stage, setStage] = useState(0);
+  const [revealed, setRevealed] = useState(0);
+
+  useEffect(() => {
+    const t1 = setTimeout(() => setStage(1), 2600);
+    return () => clearTimeout(t1);
+  }, []);
+
+  useEffect(() => {
+    if (stage !== 1) return;
+    const delays = [0, 180, 360, 540, 720, 900, 1080, 1260, 1440, 1620, 1800];
+    const timers = delays.map((ms, i) =>
+      setTimeout(() => setRevealed(i + 1), ms)
+    );
+    return () => timers.forEach(clearTimeout);
+  }, [stage]);
+
+  const reveal = (at: number): React.CSSProperties => ({
+    opacity: revealed >= at ? 1 : 0,
+    transform: revealed >= at ? "translateY(0)" : "translateY(28px)",
+    transition:
+      "opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1)",
+  });
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <main
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        background:
+          "radial-gradient(ellipse at top, #f6faf7 0%, #e6efe9 60%, #d3e0d8 100%)",
+        padding: "24px 16px",
+        fontFamily: "'Jost', system-ui, sans-serif",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          top: "-150px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: "700px",
+          height: "500px",
+          background:
+            "radial-gradient(ellipse, rgba(150,190,170,0.32) 0%, transparent 70%)",
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          bottom: "-160px",
+          right: "-120px",
+          width: "520px",
+          height: "520px",
+          background:
+            "radial-gradient(circle, rgba(201,169,97,0.28) 0%, transparent 70%)",
+          pointerEvents: "none",
+        }}
+      />
+
+      <div
+        style={{
+          position: "relative",
+          maxWidth: "460px",
+          width: "100%",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            inset: "-10px",
+            border: "1px solid rgba(201,169,97,0.55)",
+            borderRadius: "2px",
+            pointerEvents: "none",
+          }}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        <div
+          style={{
+            background: "#ffffff",
+            padding: "56px 42px 48px",
+            textAlign: "center",
+            borderRadius: "1px",
+            boxShadow:
+              "0 30px 80px rgba(60,90,75,0.18), 0 8px 24px rgba(0,0,0,0.05)",
+            position: "relative",
+            minHeight: stage === 0 ? "420px" : "auto",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            transition: "min-height 1.1s cubic-bezier(0.22, 1, 0.36, 1)",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              inset: "14px",
+              border: "1px solid rgba(30,70,60,0.28)",
+              pointerEvents: "none",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: "20px",
+              border: "1px solid rgba(201,169,97,0.55)",
+              pointerEvents: "none",
+            }}
+          />
+
+          {/* STAGE 0 — Bismillah opening */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              opacity: stage >= 1 ? 0 : 1,
+              transform: stage >= 1 ? "scale(1.05)" : "scale(1)",
+              transition:
+                "opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1)",
+              pointerEvents: "none",
+              padding: "0 40px",
+            }}
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <p
+              style={{
+                fontSize: "32px",
+                color: "#1e463c",
+                margin: 0,
+                direction: "rtl",
+                fontFamily: "'Amiri', serif",
+                lineHeight: "2",
+                padding: "0 20px",
+              }}
+            >
+              بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+            </p>
+
+            <p
+              style={{
+                fontSize: "10px",
+                letterSpacing: "8px",
+                color: "#c9a961",
+                marginTop: "22px",
+                textTransform: "uppercase",
+                fontFamily: "'Jost', sans-serif",
+                fontWeight: 400,
+              }}
+            >
+              In the Name of Allah
+            </p>
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "10px",
+                marginTop: "28px",
+              }}
+            >
+              <span style={{ width: "60px", height: "1px", background: "linear-gradient(90deg, transparent, #c9a961)" }} />
+              <span style={{ width: "6px", height: "6px", background: "#1e463c", transform: "rotate(45deg)" }} />
+              <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#c9a961" }} />
+              <span style={{ width: "6px", height: "6px", background: "#d8a8b0", transform: "rotate(45deg)" }} />
+              <span style={{ width: "60px", height: "1px", background: "linear-gradient(90deg, #c9a961, transparent)" }} />
+            </div>
+          </div>
+
+          {/* STAGE 1 — Full invitation */}
+          <div
+            style={{
+              position: "relative",
+              zIndex: 2,
+              width: "100%",
+            }}
           >
-            Documentation
-          </a>
+            {/* 1 — Bismillah small */}
+            <p
+              style={{
+                ...reveal(1),
+                fontSize: "18px",
+                color: "#1e463c",
+                margin: "0 0 8px",
+                direction: "rtl",
+                fontFamily: "'Amiri', serif",
+                lineHeight: "2",
+              }}
+            >
+              بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+            </p>
+
+            {/* 2 — In the Name of Allah */}
+            <p
+              style={{
+                ...reveal(2),
+                fontSize: "9px",
+                letterSpacing: "7px",
+                color: "#c9a961",
+                margin: "0 0 26px",
+                textTransform: "uppercase",
+                fontFamily: "'Jost', sans-serif",
+                fontWeight: 400,
+              }}
+            >
+              In the Name of Allah
+            </p>
+
+            {/* 3 — Divider */}
+            <div
+              style={{
+                ...reveal(3),
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "10px",
+                marginBottom: "26px",
+              }}
+            >
+              <span style={{ width: "60px", height: "1px", background: "linear-gradient(90deg, transparent, #c9a961)" }} />
+              <span style={{ width: "6px", height: "6px", background: "#1e463c", transform: "rotate(45deg)" }} />
+              <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#c9a961" }} />
+              <span style={{ width: "6px", height: "6px", background: "#d8a8b0", transform: "rotate(45deg)" }} />
+              <span style={{ width: "60px", height: "1px", background: "linear-gradient(90deg, #c9a961, transparent)" }} />
+            </div>
+
+            {/* 4 — The Wedding Of */}
+            <p
+              style={{
+                ...reveal(4),
+                fontSize: "10px",
+                letterSpacing: "7px",
+                color: "#5a7a6a",
+                margin: "0 0 22px",
+                textTransform: "uppercase",
+                fontFamily: "'Jost', sans-serif",
+                fontWeight: 400,
+              }}
+            >
+              The Wedding Of
+            </p>
+
+            {/* 5 — BRIDE — CORMORANT GARAMOND ITALIC */}
+            <h1
+              style={{
+                ...reveal(5),
+                fontFamily: "'Cormorant Garamond', Georgia, serif",
+                fontStyle: "italic",
+                fontWeight: 400,
+                fontSize: "62px",
+                lineHeight: "1.05",
+                color: "#1e463c",
+                margin: 0,
+                letterSpacing: "0.5px",
+              }}
+            >
+              Ayesha
+            </h1>
+
+            {/* 6 — Ampersand */}
+            <p
+              style={{
+                ...reveal(6),
+                fontFamily: "'Cormorant Garamond', Georgia, serif",
+                fontStyle: "italic",
+                fontWeight: 400,
+                fontSize: "24px",
+                color: "#c9a961",
+                margin: "10px 0",
+                lineHeight: 1,
+              }}
+            >
+              &amp;
+            </p>
+
+            {/* 7 — GROOM — CORMORANT GARAMOND ITALIC */}
+            <h1
+              style={{
+                ...reveal(7),
+                fontFamily: "'Cormorant Garamond', Georgia, serif",
+                fontStyle: "italic",
+                fontWeight: 400,
+                fontSize: "62px",
+                lineHeight: "1.05",
+                color: "#1e463c",
+                margin: 0,
+                letterSpacing: "0.5px",
+              }}
+            >
+              Ahmed
+            </h1>
+
+            {/* 8 — Divider */}
+            <div
+              style={{
+                ...reveal(8),
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "10px",
+                margin: "30px 0 24px",
+              }}
+            >
+              <span style={{ width: "60px", height: "1px", background: "linear-gradient(90deg, transparent, #c9a961, transparent)" }} />
+              <span style={{ width: "6px", height: "6px", background: "#1e463c", transform: "rotate(45deg)" }} />
+              <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#c9a961" }} />
+              <span style={{ width: "6px", height: "6px", background: "#d8a8b0", transform: "rotate(45deg)" }} />
+              <span style={{ width: "60px", height: "1px", background: "linear-gradient(90deg, transparent, #c9a961, transparent)" }} />
+            </div>
+
+            {/* 9 — Date */}
+            <div style={reveal(9)}>
+              <p
+                style={{
+                  fontFamily: "'Jost', sans-serif",
+                  fontWeight: 500,
+                  fontSize: "14px",
+                  letterSpacing: "6px",
+                  color: "#1e463c",
+                  margin: "0 0 8px",
+                }}
+              >
+                14 · 09 · 2026
+              </p>
+              <p
+                style={{
+                  fontFamily: "'Cormorant Garamond', Georgia, serif",
+                  fontStyle: "italic",
+                  fontSize: "13px",
+                  letterSpacing: "2px",
+                  color: "#7a8f82",
+                  margin: "0 0 24px",
+                }}
+              >
+                Saturday · 4:00 PM
+              </p>
+            </div>
+
+            {/* 10 — Venue */}
+            <div
+              style={{
+                ...reveal(10),
+                paddingTop: "22px",
+                borderTop: "1px solid rgba(30,70,60,0.22)",
+              }}
+            >
+              <p
+                style={{
+                  fontFamily: "'Jost', sans-serif",
+                  fontWeight: 500,
+                  fontSize: "12px",
+                  letterSpacing: "5px",
+                  color: "#1e463c",
+                  margin: "0 0 8px",
+                  textTransform: "uppercase",
+                }}
+              >
+                Jamia Masjid
+              </p>
+              <p
+                style={{
+                  fontFamily: "'Cormorant Garamond', Georgia, serif",
+                  fontStyle: "italic",
+                  fontSize: "12px",
+                  color: "#7a8f82",
+                  letterSpacing: "1.5px",
+                  margin: 0,
+                }}
+              >
+                123 Main Street · Boston, MA
+              </p>
+            </div>
+
+            {/* 11 — Dua */}
+            <p
+              style={{
+                ...reveal(11),
+                fontFamily: "'Jost', sans-serif",
+                fontWeight: 400,
+                fontSize: "9px",
+                letterSpacing: "7px",
+                color: "#c9a961",
+                marginTop: "28px",
+                textTransform: "uppercase",
+              }}
+            >
+              Barakallahu Lakuma
+            </p>
+          </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }
