@@ -13,16 +13,16 @@ export default function Home() {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  // Very fast opening
+  // ⏱ 900ms — opening Bismillah
   useEffect(() => {
-    const t1 = setTimeout(() => setStage(1), 500);
+    const t1 = setTimeout(() => setStage(1), 900);
     return () => clearTimeout(t1);
   }, []);
 
-  // Very fast cascade
+  // ⏱ 80ms steps → cascade finishes at 800ms
   useEffect(() => {
     if (stage !== 1) return;
-    const delays = [0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500];
+    const delays = [0, 80, 160, 240, 320, 400, 480, 560, 640, 720, 800];
     const timers = delays.map((ms, i) =>
       setTimeout(() => setRevealed(i + 1), ms)
     );
@@ -126,7 +126,7 @@ export default function Home() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            transition: "min-height 0.5s cubic-bezier(0.22, 1, 0.36, 1)",
+            transition: "min-height 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
             overflow: "hidden",
           }}
         >
@@ -159,7 +159,7 @@ export default function Home() {
               opacity: stage >= 1 ? 0 : 1,
               transform: stage >= 1 ? "scale(1.05)" : "scale(1)",
               transition:
-                "opacity 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)",
+                "opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
               pointerEvents: "none",
               padding: "0 12px",
             }}
