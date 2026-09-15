@@ -13,14 +13,16 @@ export default function Home() {
     return () => window.removeEventListener("resize", check);
   }, []);
 
+  // ← FASTER opening (was 2600)
   useEffect(() => {
-    const t1 = setTimeout(() => setStage(1), 2600);
+    const t1 = setTimeout(() => setStage(1), 1500);
     return () => clearTimeout(t1);
   }, []);
 
+  // ← FASTER reveal cascade (was 180ms steps)
   useEffect(() => {
     if (stage !== 1) return;
-    const delays = [0, 180, 360, 540, 720, 900, 1080, 1260, 1440, 1620, 1800];
+    const delays = [0, 130, 260, 390, 520, 650, 780, 910, 1040, 1170, 1300];
     const timers = delays.map((ms, i) =>
       setTimeout(() => setRevealed(i + 1), ms)
     );
@@ -53,7 +55,22 @@ export default function Home() {
         width: "100%",
       }}
     >
-      {/* Top glow */}
+      {/* Allow 2-line wrap on very small phones */}
+      <style>{`
+        @media (max-width: 360px) {
+          .bismillah-big {
+            white-space: normal !important;
+            font-size: 6vw !important;
+            line-height: 1.4 !important;
+          }
+          .bismillah-small {
+            white-space: normal !important;
+            font-size: 4.6vw !important;
+            line-height: 1.4 !important;
+          }
+        }
+      `}</style>
+
       <div
         style={{
           position: "absolute",
@@ -67,7 +84,6 @@ export default function Home() {
           pointerEvents: "none",
         }}
       />
-      {/* Bottom glow */}
       <div
         style={{
           position: "absolute",
@@ -132,7 +148,7 @@ export default function Home() {
             }}
           />
 
-          {/* STAGE 0 — Bismillah opening */}
+          {/* STAGE 0 */}
           <div
             style={{
               position: "absolute",
@@ -146,17 +162,18 @@ export default function Home() {
               transition:
                 "opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1)",
               pointerEvents: "none",
-              padding: "0 16px",
+              padding: "0 12px",
             }}
           >
             <p
+              className="bismillah-big"
               style={{
-                fontSize: "clamp(15px, 4.6vw, 32px)",
+                fontSize: "min(7.5vw, 32px)",
                 color: "#1e463c",
                 margin: 0,
                 direction: "rtl",
                 fontFamily: "'Amiri', serif",
-                lineHeight: "2",
+                lineHeight: "1.8",
                 whiteSpace: "nowrap",
               }}
             >
@@ -194,31 +211,24 @@ export default function Home() {
             </div>
           </div>
 
-          {/* STAGE 1 — Full invitation */}
-          <div
-            style={{
-              position: "relative",
-              zIndex: 2,
-              width: "100%",
-            }}
-          >
-            {/* 1 — Bismillah small */}
+          {/* STAGE 1 */}
+          <div style={{ position: "relative", zIndex: 2, width: "100%" }}>
             <p
+              className="bismillah-small"
               style={{
                 ...reveal(1),
-                fontSize: "clamp(12px, 3.6vw, 18px)",
+                fontSize: "min(5.5vw, 18px)",
                 color: "#1e463c",
                 margin: "0 0 8px",
                 direction: "rtl",
                 fontFamily: "'Amiri', serif",
-                lineHeight: "2",
+                lineHeight: "1.8",
                 whiteSpace: "nowrap",
               }}
             >
               بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
             </p>
 
-            {/* 2 — In the Name of Allah */}
             <p
               style={{
                 ...reveal(2),
@@ -234,7 +244,6 @@ export default function Home() {
               In the Name of Allah
             </p>
 
-            {/* 3 — Divider */}
             <div
               style={{
                 ...reveal(3),
@@ -252,7 +261,6 @@ export default function Home() {
               <span style={{ width: dividerLineWidth, height: "1px", background: "linear-gradient(90deg, #c9a961, transparent)" }} />
             </div>
 
-            {/* 4 — The Wedding Of */}
             <p
               style={{
                 ...reveal(4),
@@ -268,7 +276,6 @@ export default function Home() {
               The Wedding Of
             </p>
 
-            {/* 5 — Bride */}
             <h1
               style={{
                 ...reveal(5),
@@ -286,7 +293,6 @@ export default function Home() {
               Ayesha
             </h1>
 
-            {/* 6 — Ampersand */}
             <p
               style={{
                 ...reveal(6),
@@ -302,7 +308,6 @@ export default function Home() {
               &amp;
             </p>
 
-            {/* 7 — Groom */}
             <h1
               style={{
                 ...reveal(7),
@@ -320,7 +325,6 @@ export default function Home() {
               Ahmed
             </h1>
 
-            {/* 8 — Divider */}
             <div
               style={{
                 ...reveal(8),
@@ -338,7 +342,6 @@ export default function Home() {
               <span style={{ width: dividerLineWidth, height: "1px", background: "linear-gradient(90deg, transparent, #c9a961, transparent)" }} />
             </div>
 
-            {/* 9 — Date */}
             <div style={reveal(9)}>
               <p
                 style={{
@@ -366,7 +369,6 @@ export default function Home() {
               </p>
             </div>
 
-            {/* 10 — Venue */}
             <div
               style={{
                 ...reveal(10),
@@ -401,7 +403,6 @@ export default function Home() {
               </p>
             </div>
 
-            {/* 11 — Dua */}
             <p
               style={{
                 ...reveal(11),
