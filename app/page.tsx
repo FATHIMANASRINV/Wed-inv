@@ -13,16 +13,16 @@ export default function Home() {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  // ← FASTER opening (was 2600)
+  // Faster opening: 900ms (was 2600 → 1500)
   useEffect(() => {
-    const t1 = setTimeout(() => setStage(1), 1500);
+    const t1 = setTimeout(() => setStage(1), 900);
     return () => clearTimeout(t1);
   }, []);
 
-  // ← FASTER reveal cascade (was 180ms steps)
+  // Faster reveal cascade
   useEffect(() => {
     if (stage !== 1) return;
-    const delays = [0, 130, 260, 390, 520, 650, 780, 910, 1040, 1170, 1300];
+    const delays = [0, 90, 180, 270, 360, 450, 540, 630, 720, 810, 900];
     const timers = delays.map((ms, i) =>
       setTimeout(() => setRevealed(i + 1), ms)
     );
@@ -33,7 +33,7 @@ export default function Home() {
     opacity: revealed >= at ? 1 : 0,
     transform: revealed >= at ? "translateY(0)" : "translateY(28px)",
     transition:
-      "opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1)",
+      "opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)",
   });
 
   const nameSize = "clamp(42px, 13vw, 62px)";
@@ -55,9 +55,9 @@ export default function Home() {
         width: "100%",
       }}
     >
-      {/* Allow 2-line wrap on very small phones */}
+      {/* Two-line fallback only for very tiny phones (≤340px) */}
       <style>{`
-        @media (max-width: 360px) {
+        @media (max-width: 340px) {
           .bismillah-big {
             white-space: normal !important;
             font-size: 6vw !important;
@@ -127,7 +127,7 @@ export default function Home() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            transition: "min-height 1.1s cubic-bezier(0.22, 1, 0.36, 1)",
+            transition: "min-height 0.8s cubic-bezier(0.22, 1, 0.36, 1)",
             overflow: "hidden",
           }}
         >
@@ -148,7 +148,7 @@ export default function Home() {
             }}
           />
 
-          {/* STAGE 0 */}
+          {/* STAGE 0 — Bismillah opening */}
           <div
             style={{
               position: "absolute",
@@ -160,7 +160,7 @@ export default function Home() {
               opacity: stage >= 1 ? 0 : 1,
               transform: stage >= 1 ? "scale(1.05)" : "scale(1)",
               transition:
-                "opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1)",
+                "opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)",
               pointerEvents: "none",
               padding: "0 12px",
             }}
@@ -168,7 +168,7 @@ export default function Home() {
             <p
               className="bismillah-big"
               style={{
-                fontSize: "min(7.5vw, 32px)",
+                fontSize: "min(6.5vw, 30px)",
                 color: "#1e463c",
                 margin: 0,
                 direction: "rtl",
@@ -211,13 +211,13 @@ export default function Home() {
             </div>
           </div>
 
-          {/* STAGE 1 */}
+          {/* STAGE 1 — Full invitation */}
           <div style={{ position: "relative", zIndex: 2, width: "100%" }}>
             <p
               className="bismillah-small"
               style={{
                 ...reveal(1),
-                fontSize: "min(5.5vw, 18px)",
+                fontSize: "min(5vw, 17px)",
                 color: "#1e463c",
                 margin: "0 0 8px",
                 direction: "rtl",
