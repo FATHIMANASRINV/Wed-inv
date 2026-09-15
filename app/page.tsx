@@ -15,25 +15,26 @@ export default function Home() {
 
   // ⏱ Big Bismillah holds for exactly 2 seconds
   useEffect(() => {
-    const t1 = setTimeout(() => setStage(1), 2000);
+    const t1 = setTimeout(() => setStage(1), 1000);
     return () => clearTimeout(t1);
   }, []);
 
-  // Cascade after Bismillah
+  // Slow, elegant cascade (restored)
   useEffect(() => {
     if (stage !== 1) return;
-    const delays = [0, 80, 160, 240, 320, 400, 480, 560, 640, 720, 800];
+    const delays = [0, 180, 360, 540, 720, 900, 1080, 1260, 1440, 1620, 1800];
     const timers = delays.map((ms, i) =>
       setTimeout(() => setRevealed(i + 1), ms)
     );
     return () => timers.forEach(clearTimeout);
   }, [stage]);
 
+  // Slow, graceful fade-in for Stage 1
   const reveal = (at) => ({
     opacity: revealed >= at ? 1 : 0,
     transform: revealed >= at ? "translateY(0)" : "translateY(28px)",
     transition:
-      "opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)",
+      "opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1)",
   });
 
   const nameSize = "clamp(42px, 13vw, 62px)";
@@ -126,7 +127,7 @@ export default function Home() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            transition: "min-height 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
+            transition: "min-height 1.1s cubic-bezier(0.22, 1, 0.36, 1)",
             overflow: "hidden",
           }}
         >
@@ -159,7 +160,7 @@ export default function Home() {
               opacity: stage >= 1 ? 0 : 1,
               transform: stage >= 1 ? "scale(1.05)" : "scale(1)",
               transition:
-                "opacity 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1)",
+                "opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1)",
               pointerEvents: "none",
               padding: "0 12px",
             }}
