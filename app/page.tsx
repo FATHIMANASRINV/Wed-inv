@@ -13,13 +13,13 @@ export default function Home() {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  // ⏱ 900ms — opening Bismillah
+  // ⏱ Big Bismillah holds for exactly 2 seconds
   useEffect(() => {
-    const t1 = setTimeout(() => setStage(1), 900);
+    const t1 = setTimeout(() => setStage(1), 2000);
     return () => clearTimeout(t1);
   }, []);
 
-  // ⏱ 80ms steps → cascade finishes at 800ms
+  // Cascade after Bismillah
   useEffect(() => {
     if (stage !== 1) return;
     const delays = [0, 80, 160, 240, 320, 400, 480, 560, 640, 720, 800];
@@ -159,7 +159,7 @@ export default function Home() {
               opacity: stage >= 1 ? 0 : 1,
               transform: stage >= 1 ? "scale(1.05)" : "scale(1)",
               transition:
-                "opacity 0.4s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
+                "opacity 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1)",
               pointerEvents: "none",
               padding: "0 12px",
             }}
