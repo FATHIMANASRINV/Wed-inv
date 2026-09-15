@@ -13,16 +13,16 @@ export default function Home() {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  // Faster opening: 900ms (was 2600 → 1500)
+  // Very fast opening
   useEffect(() => {
-    const t1 = setTimeout(() => setStage(1), 900);
+    const t1 = setTimeout(() => setStage(1), 500);
     return () => clearTimeout(t1);
   }, []);
 
-  // Faster reveal cascade
+  // Very fast cascade
   useEffect(() => {
     if (stage !== 1) return;
-    const delays = [0, 90, 180, 270, 360, 450, 540, 630, 720, 810, 900];
+    const delays = [0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500];
     const timers = delays.map((ms, i) =>
       setTimeout(() => setRevealed(i + 1), ms)
     );
@@ -33,7 +33,7 @@ export default function Home() {
     opacity: revealed >= at ? 1 : 0,
     transform: revealed >= at ? "translateY(0)" : "translateY(28px)",
     transition:
-      "opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)",
+      "opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1), transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)",
   });
 
   const nameSize = "clamp(42px, 13vw, 62px)";
@@ -55,7 +55,6 @@ export default function Home() {
         width: "100%",
       }}
     >
-      {/* Two-line fallback only for very tiny phones (≤340px) */}
       <style>{`
         @media (max-width: 340px) {
           .bismillah-big {
@@ -127,7 +126,7 @@ export default function Home() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            transition: "min-height 0.8s cubic-bezier(0.22, 1, 0.36, 1)",
+            transition: "min-height 0.5s cubic-bezier(0.22, 1, 0.36, 1)",
             overflow: "hidden",
           }}
         >
@@ -148,7 +147,7 @@ export default function Home() {
             }}
           />
 
-          {/* STAGE 0 — Bismillah opening */}
+          {/* STAGE 0 */}
           <div
             style={{
               position: "absolute",
@@ -160,7 +159,7 @@ export default function Home() {
               opacity: stage >= 1 ? 0 : 1,
               transform: stage >= 1 ? "scale(1.05)" : "scale(1)",
               transition:
-                "opacity 0.7s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)",
+                "opacity 0.45s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)",
               pointerEvents: "none",
               padding: "0 12px",
             }}
@@ -211,7 +210,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* STAGE 1 — Full invitation */}
+          {/* STAGE 1 */}
           <div style={{ position: "relative", zIndex: 2, width: "100%" }}>
             <p
               className="bismillah-small"
