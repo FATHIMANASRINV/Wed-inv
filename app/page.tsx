@@ -66,7 +66,7 @@ export default function Home() {
     const start = "20261122T110000";
     const end = "20261122T150000";
     const title = encodeURIComponent(
-      "Wedding of Mohammed Ashiq & Fathima Najiya Nasrin"
+      "Wedding of mohamed Ashiq & Fathima Najiya Nasrin"
     );
     const loc = encodeURIComponent("Firdouz Annexe Auditorium, Puthantheru");
     return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&location=${loc}`;
@@ -77,7 +77,7 @@ export default function Home() {
     const url = typeof window !== "undefined" ? window.location.href : "";
     const shareData = {
       title: "Wedding Invitation — Ashiq & Najiya",
-      text: "You're invited to the wedding of Mohammed Ashiq & Fathima Najiya Nasrin — 22 Nov 2026, Firdouz Annexe, Puthantheru.",
+      text: "You're invited to the wedding of mohamed Ashiq & Fathima Najiya Nasrin — 22 Nov 2026, Firdouz Annexe, Puthantheru.",
       url,
     };
     try {
@@ -110,7 +110,7 @@ export default function Home() {
           </p>
           <p className="kicker-script">The Wedding Of</p>
           <h1 className="script-names opening-names">
-            Mohammed Ashiq <span>&amp;</span> Fathima Najiya Nasrin
+            mohamed Ashiq <span>&amp;</span> Fathima Najiya Nasrin
           </h1>
           <p className="opening-date">22 · 11 · 2026</p>
           <button className="open-btn" onClick={() => setOpened(true)}>
@@ -156,7 +156,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* ✅ location shown prominently in hero */}
             <p className="hero-venue">
               Firdouz Annexe Auditorium · Puthantheru
             </p>
@@ -169,7 +168,7 @@ export default function Home() {
           {/* ============ COUPLE NAMES ============ */}
           <section className="names-sec">
             <p className="kicker">Together With Their Families</p>
-            <h1 className="couple-name">Mohammed Ashiq</h1>
+            <h1 className="couple-name">mohamed Ashiq</h1>
             <div className="amp-row">
               <span className="amp-line" />
               <span className="amp">&amp;</span>
@@ -179,6 +178,32 @@ export default function Home() {
             <p className="family-note">
               Request the honour of your presence at their wedding celebration
             </p>
+          </section>
+
+          <Divider />
+
+          {/* ============ INVITATION BY BRIDE'S FAMILY ============ */}
+          <section className="invite-sec">
+            <p className="kicker">With The Blessings Of</p>
+
+            <p className="invite-parents">Mr. Abdul Rahman &amp; Mrs. Kunheevi</p>
+            <p className="invite-sub">along with their sons</p>
+            <p className="invite-parents">Nabeel &amp; Nafil</p>
+
+            <p className="invite-note">
+              joyfully invite you to share in the wedding celebration of their
+              beloved daughter
+            </p>
+
+            <h2 className="invite-name">Fathima Najiya Nasrin</h2>
+
+            <div className="invite-with">
+              <span className="invite-with-line" />
+              <span className="invite-with-word">with</span>
+              <span className="invite-with-line" />
+            </div>
+
+            <h2 className="invite-name">mohamed Ashiq</h2>
           </section>
 
           <Divider />
@@ -220,13 +245,12 @@ export default function Home() {
 
           <Divider />
 
-          {/* ============ EVENTS ============ */}
+          {/* ============ EVENT (single, centered) ============ */}
           <section className="events">
             <p className="kicker">The Celebration</p>
             <h2 className="h2">Join Us</h2>
 
-            <div className="event-grid">
-              {/* ✅ WEDDING FIRST — with big venue block */}
+            <div className="event-grid event-grid-single">
               <article className="event event-featured">
                 <div className="icon">♡</div>
                 <p className="small">THE WEDDING</p>
@@ -239,26 +263,6 @@ export default function Home() {
                 </div>
                 <a
                   href="https://maps.google.com/?q=Firdouz+Annexe+Auditorium+Puthantheru"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  View Location →
-                </a>
-              </article>
-
-              {/* NIKAH */}
-              <article className="event">
-                <div className="icon">☾</div>
-                <p className="small">THE NIKAH</p>
-                <h3>Nikah Ceremony</h3>
-                <strong>20 NOVEMBER 2026</strong>
-                <span>Friday · 4:00 PM</span>
-                <div className="venue-block">
-                  <span className="venue">Juma Masjid</span>
-                  <span className="venue-sub">Nadakkav, Tanur</span>
-                </div>
-                <a
-                  href="https://maps.google.com/?q=Juma+Masjid+Nadakkav+Tanur"
                   target="_blank"
                   rel="noreferrer"
                 >
