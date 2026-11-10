@@ -68,7 +68,7 @@ export default function Home() {
     const title = encodeURIComponent(
       "Wedding of mohamed Ashiq & Fathima Najiya Nasrin"
     );
-    const loc = encodeURIComponent("Firdouz Annexe Auditorium, Puthantheru");
+    const loc = encodeURIComponent("Firdouz Auditorium, Puthantheru");
     return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${start}/${end}&location=${loc}`;
   };
 
@@ -77,7 +77,7 @@ export default function Home() {
     const url = typeof window !== "undefined" ? window.location.href : "";
     const shareData = {
       title: "Wedding Invitation — Ashiq & Najiya",
-      text: "You're invited to the wedding of mohamed Ashiq & Fathima Najiya Nasrin — 22 Nov 2026, Firdouz Annexe, Puthantheru.",
+      text: "You're invited to the wedding of mohamed Ashiq & Fathima Najiya Nasrin — 22 Nov 2026, Firdouz Auditorium, Puthantheru.",
       url,
     };
     try {
@@ -157,7 +157,7 @@ export default function Home() {
             </div>
 
             <p className="hero-venue">
-              Firdouz Annexe Auditorium · Puthantheru
+              Firdouz Auditorium · Puthantheru
             </p>
 
             <button className="scroll-btn" onClick={() => scrollTo("details")}>
@@ -258,11 +258,11 @@ export default function Home() {
                 <strong>22 NOVEMBER 2026</strong>
                 <span>Sunday · 11:00 AM</span>
                 <div className="venue-block">
-                  <span className="venue">Firdouz  Auditorium</span>
+                  <span className="venue">Firdouz Auditorium</span>
                   <span className="venue-sub">Puthantheru</span>
                 </div>
                <a
-  href="https://maps.google.com/?q=10.958487819634554,75.89635059300824"
+  href="https://www.google.com/maps/search/?api=1&query=Firdouz+Auditorium+Tanalur+Malappuram&utm_source=chatgpt.com"
   target="_blank"
   rel="noreferrer"
 >
