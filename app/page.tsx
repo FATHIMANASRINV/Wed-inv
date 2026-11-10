@@ -258,16 +258,16 @@ export default function Home() {
                 <strong>22 NOVEMBER 2026</strong>
                 <span>Sunday · 11:00 AM</span>
                 <div className="venue-block">
-                  <span className="venue">Firdouz Annexe Auditorium</span>
+                  <span className="venue">Firdouz  Auditorium</span>
                   <span className="venue-sub">Puthantheru</span>
                 </div>
-                <a
-                  href="https://maps.google.com/?q=Firdouz+Annexe+Auditorium+Puthantheru"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  View Location →
-                </a>
+               <a
+  href="https://maps.google.com/?q=10.958487819634554,75.89635059300824"
+  target="_blank"
+  rel="noreferrer"
+>
+  View Location →
+</a>
               </article>
             </div>
           </section>
